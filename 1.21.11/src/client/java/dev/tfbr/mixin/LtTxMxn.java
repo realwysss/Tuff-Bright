@@ -4,12 +4,30 @@ import com.mojang.blaze3d.buffers.Std140Builder;
 import dev.tfbr.Cfg;
 import net.minecraft.client.renderer.LightTexture;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LightTexture.class)
 public abstract class LtTxMxn {
 	private static final String PF = "Lcom/mojang/blaze3d/buffers/Std140Builder;putFloat(F)Lcom/mojang/blaze3d/buffers/Std140Builder;";
+
+	@Shadow
+	private boolean updateLightTexture;
+
+	private boolean lo;
+	private int lp = -1;
+
+	@Inject(method = "updateLightTexture", at = @At("HEAD"))
+	private void chk(float f, CallbackInfo ci) {
+		if (Cfg.c.on != lo || Cfg.c.pct != lp) {
+			lo = Cfg.c.on;
+			lp = Cfg.c.pct;
+			updateLightTexture = true;
+		}
+	}
 
 	@ModifyArg(method = "updateLightTexture", at = @At(value = "INVOKE", target = PF, ordinal = 4), index = 0)
 	private float drk(float v) {
