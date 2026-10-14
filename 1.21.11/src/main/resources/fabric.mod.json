@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "tuffbright",
+	"version": "${version}",
+	"name": "Tuff Bright",
+	"description": "fullbright that actually works: every block fully lit, no darkness effect, strength slider. settings through mod menu and cloth config.",
+	"authors": ["realwysss"],
+	"contact": {"sources": "https://github.com/realwysss/Tuff-Bright"},
+	"license": "MIT",
+	"icon": "assets/tuffbright/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": ["dev.tfbr.TfbrClient"],
+		"modmenu": ["dev.tfbr.ModmenuIntgr"]
+	},
+	"mixins": [
+		{
+			"config": "tuffbright.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"suggests": {
+		"modmenu": "*",
+		"cloth-config": "*"
+	},
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"minecraft": ">=1.21.11 <1.22",
+		"java": ">=21"
+	}
+}
