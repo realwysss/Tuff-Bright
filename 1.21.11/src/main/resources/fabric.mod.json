@@ -3,7 +3,7 @@
 	"id": "tuffbright",
 	"version": "${version}",
 	"name": "Tuff Bright",
-	"description": "fullbright that actually works: every block fully lit, no darkness effect, strength slider. settings through mod menu and cloth config.",
+	"description": "fullbright that actually works: every block fully lit, no darkness effect, strength slider and /tuffbright command. settings through mod menu and cloth config.",
 	"authors": ["realwysss"],
 	"contact": {"sources": "https://github.com/realwysss/Tuff-Bright"},
 	"license": "MIT",
@@ -25,6 +25,7 @@
 	},
 	"depends": {
 		"fabricloader": ">=0.16.0",
+		"fabric-command-api-v2": "*",
 		"minecraft": ">=1.21.11 <1.22",
 		"java": ">=21"
 	}

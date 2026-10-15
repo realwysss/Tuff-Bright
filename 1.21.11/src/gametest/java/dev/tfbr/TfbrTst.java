@@ -24,9 +24,9 @@ public class TfbrTst implements FabricClientGameTest {
 		try (TestSingleplayerContext s = ctx.worldBuilder().create()) {
 			ctx.waitTicks(40);
 			ck(Cfg.c.on && Cfg.c.pct == 100, "defaults are on at 100%");
-			ck(Cfg.bst() == 20f, "100% boost is 20");
+			ck(Cfg.bst() == 12f, "100% boost is 12");
 			Cfg.c.pct = 50;
-			ck(Cfg.bst() == 5f, "50% boost is 5");
+			ck(Cfg.bst() == 6f, "50% boost is 6");
 			Cfg.c.pct = 0;
 			ck(!Cfg.on(), "0% is off");
 			Cfg.c = new Cfg();
@@ -51,6 +51,13 @@ public class TfbrTst implements FabricClientGameTest {
 			shot(ctx, s, "5_cave_on", true, 100, true);
 			shot(ctx, s, "6_cave_half", true, 50, true);
 			shot(ctx, s, "7_cave_low", true, 15, true);
+			shot(ctx, s, "7b_cave_30", true, 30, true);
+			ctx.runOnClient(m -> {
+				Cfg.c = new Cfg();
+				m.player.connection.sendCommand("tuffbright 40");
+			});
+			ctx.waitTicks(5);
+			ck(Cfg.c.pct == 40, "tuffbright command sets 40");
 			ctx.runOnClient(m -> Cfg.c = new Cfg());
 			ctx.runOnClient(m -> m.setScreen(CfgScr.mk(null)));
 			ctx.waitTicks(10);

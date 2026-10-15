@@ -17,14 +17,13 @@ public abstract class LtTxMxn {
 	@Shadow
 	private boolean updateLightTexture;
 
-	private boolean lo;
-	private int lp = -1;
+	private float lb = -1f;
 
 	@Inject(method = "updateLightTexture", at = @At("HEAD"))
 	private void chk(float f, CallbackInfo ci) {
-		if (Cfg.c.on != lo || Cfg.c.pct != lp) {
-			lo = Cfg.c.on;
-			lp = Cfg.c.pct;
+		float b = Cfg.on() ? Cfg.bst() : 0f;
+		if (b != lb) {
+			lb = b;
 			updateLightTexture = true;
 		}
 	}

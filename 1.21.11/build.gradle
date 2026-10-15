@@ -38,6 +38,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}"
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	
 	gametestImplementation sourceSets.main.output
 	gametestImplementation sourceSets.client.output
 }
