@@ -1,14 +1,27 @@
 package dev.tfbr;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 
 public class TfbrClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		Cfg.ld();
+		KeyMapping k = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.tuffbright.toggle", InputConstants.KEY_B, KeyMapping.Category.register(Identifier.fromNamespaceAndPath("tuffbright", "main"))));
+		ClientTickEvents.END_CLIENT_TICK.register(m -> {
+			while (k.consumeClick()) {
+				Cfg.c.on = !Cfg.c.on;
+				Cfg.sv();
+				if (m.player != null) m.gui.setOverlayMessage(Component.literal("tuff bright " + (Cfg.c.on ? "on" : "off")), false);
+			}
+		});
 		ClientCommandRegistrationCallback.EVENT.register((d, r) -> d.register(ClientCommandManager.literal("tuffbright")
 				.executes(x -> {
 					x.getSource().sendFeedback(Component.literal("tuff bright is " + (Cfg.on() ? Cfg.c.pct + "%" : "off")));

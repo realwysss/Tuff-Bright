@@ -40,6 +40,6 @@ public class Cfg {
 
 	public static float bst() {
 		float x = c.pct / 100f;
-		return 20f * x * x;
+		return 12f * x;
 	}
 }
