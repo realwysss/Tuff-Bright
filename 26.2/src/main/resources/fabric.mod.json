@@ -6,7 +6,7 @@
 	"description": "fullbright that actually works: every block fully lit, no darkness effect, strength slider. settings through mod menu and cloth config.",
 	"authors": ["realwysss"],
 	"contact": {"sources": "https://github.com/realwysss/Tuff-Bright"},
-	"license": "MIT",
+	"license": "All-Rights-Reserved",
 	"icon": "assets/tuffbright/icon.png",
 	"environment": "client",
 	"entrypoints": {
